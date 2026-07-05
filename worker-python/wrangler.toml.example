@@ -4,6 +4,7 @@ name = "maple-life-docs-python"
 main = "src/entry.py"
 compatibility_date = "2026-07-05"
 compatibility_flags = ["python_workers"]
+workers_dev = true
 
 [observability]
 enabled = true
