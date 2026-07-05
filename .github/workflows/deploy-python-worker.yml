@@ -22,6 +22,10 @@ jobs:
       - name: Install Wrangler
         run: npm ci
 
+      - name: Prepare Worker config
+        working-directory: worker-python
+        run: cp wrangler.toml.example wrangler.toml
+
       - name: Deploy Cloudflare Python Worker
         working-directory: worker-python
         env:
