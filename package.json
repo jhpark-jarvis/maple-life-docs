@@ -1,0 +1,27 @@
+{
+  "name": "maple-life-docs",
+  "version": "1.0.0",
+  "description": "`MAPLE LIFE DEV Docs`는 메이플스토리 월드 개발팀을 위한 내부 협업용 웹앱입니다.",
+  "main": "index.js",
+  "scripts": {
+    "cf:deploy": "wrangler deploy",
+    "cf:deploy:dry": "wrangler deploy --dry-run",
+    "cf:tail": "wrangler tail",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhpark-jarvis/maple-life-docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jhpark-jarvis/maple-life-docs/issues"
+  },
+  "homepage": "https://github.com/jhpark-jarvis/maple-life-docs#readme",
+  "devDependencies": {
+    "wrangler": "^4.107.0"
+  }
+}
