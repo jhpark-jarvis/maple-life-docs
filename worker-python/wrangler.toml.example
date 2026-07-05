@@ -10,9 +10,9 @@ enabled = true
 
 [[d1_databases]]
 binding = "DB"
-database_name = "your-d1-database-name"
-database_id = "your-d1-database-id"
+database_name = "maple-life-docs"
+database_id = "<D1_DATABASE_ID>"
 
 [[r2_buckets]]
 binding = "DOCUMENT_IMAGES"
-bucket_name = "your-r2-bucket-name"
+bucket_name = "<R2_BUCKET_NAME>"
