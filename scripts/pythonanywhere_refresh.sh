@@ -16,9 +16,10 @@ if command -v workon >/dev/null 2>&1; then
   workon "$VENV_NAME"
 elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   set +u
+  export ZSH_VERSION="${ZSH_VERSION-}"
   source /usr/local/bin/virtualenvwrapper.sh
-  set -u
   workon "$VENV_NAME"
+  set -u
 elif [ -d "$HOME/.virtualenvs/$VENV_NAME" ]; then
   source "$HOME/.virtualenvs/$VENV_NAME/bin/activate"
 elif [ -d "$FALLBACK_VENV_DIR" ]; then
