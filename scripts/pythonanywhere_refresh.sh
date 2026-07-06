@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_DIR="${PROJECT_DIR:-$HOME/maple-life-docs}"
-VENV_NAME="${VENV_NAME:-maple-life-docs}"
+VENV_NAME="${VENV_NAME:-maple-life-docs-venv}"
 FALLBACK_VENV_DIR="${FALLBACK_VENV_DIR:-$PROJECT_DIR/.venv}"
 
 echo "[1/5] move to project directory"
@@ -15,7 +15,9 @@ echo "[3/5] activate virtualenv"
 if command -v workon >/dev/null 2>&1; then
   workon "$VENV_NAME"
 elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  set +u
   source /usr/local/bin/virtualenvwrapper.sh
+  set -u
   workon "$VENV_NAME"
 elif [ -d "$HOME/.virtualenvs/$VENV_NAME" ]; then
   source "$HOME/.virtualenvs/$VENV_NAME/bin/activate"
