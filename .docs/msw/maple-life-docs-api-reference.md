@@ -235,7 +235,58 @@ curl "<MAPLE_LIFE_DOCS_BASE_URL>/documents/search-links?q=%EC%A3%BC%EB%AF%BC%EC%
 
 - 용도: WBS 작업 삭제
 
-## 6. 일정 API
+## 6. 에셋 API
+
+### `GET /api/assets`
+
+- 용도: 에셋 목록, 검색, 증분 동기화 조회
+- 주요 query:
+  - `q`
+  - `asset_type`
+  - `status`
+  - `tag`
+  - `updated_since`
+  - `include_hidden`
+  - `page`
+  - `per_page`
+
+### `GET /api/assets/{asset_id}`
+
+- 용도: 에셋 상세 조회
+
+### `GET /api/assets/editor`
+
+- 용도: 에셋 등록/수정 bootstrap 데이터 조회
+- 주요 query:
+  - `asset_id`
+
+### `POST /api/assets`
+
+- 용도: 에셋 생성
+- 전송 방식:
+  - `multipart/form-data`
+- 주요 field:
+  - `file`
+  - `title`
+  - `asset_type`
+  - `category`
+  - `tags`
+  - `status`
+  - `is_hidden`
+  - `created_by`
+  - `notes`
+
+### `POST /api/assets/{asset_id}`
+
+- 용도: 에셋 메타데이터 수정 또는 파일 교체
+- 전송 방식:
+  - `multipart/form-data`
+
+### `DELETE /api/assets/{asset_id}`
+
+- 용도: 에셋 삭제
+
+## 7. 일정 API
 
 ### `GET /api/schedules`
 
@@ -273,7 +324,7 @@ curl "<MAPLE_LIFE_DOCS_BASE_URL>/documents/search-links?q=%EC%A3%BC%EB%AF%BC%EC%
 
 - 용도: 일정 삭제
 
-## 7. 멤버 API
+## 8. 멤버 API
 
 ### `GET /api/members`
 
@@ -301,7 +352,7 @@ curl "<MAPLE_LIFE_DOCS_BASE_URL>/documents/search-links?q=%EC%A3%BC%EB%AF%BC%EC%
 
 - 용도: 멤버 삭제
 
-## 8. 로그/텔레메트리 API
+## 9. 로그/텔레메트리 API
 
 ### `POST /api/telemetry/page-view`
 
@@ -325,14 +376,14 @@ curl "<MAPLE_LIFE_DOCS_BASE_URL>/documents/search-links?q=%EC%A3%BC%EB%AF%BC%EC%
   - `summary`
   - `filters`
 
-## 9. 에이전트 사용 시 주의
+## 10. 에이전트 사용 시 주의
 
 - 공개 API만으로 숨김 문서 전체를 항상 완전하게 복원할 수 있는 것은 아니다.
 - 문서 최신성, 숨김 문서, 초안 문서까지 포함한 검증이 필요하면 D1 direct query 또는 repository 접근을 같이 사용한다.
 - API 응답은 화면용 구조가 섞여 있으므로, 에이전트는 `목록용 API`와 `원문 검증용 데이터 소스`를 구분해서 사용해야 한다.
 - 구현 선택지가 `MSW 기본 방식`과 `커스텀 방식`으로 나뉘면, API를 확인한 뒤에도 최종 선택은 반드시 사용자에게 먼저 질문해야 한다.
 
-## 10. 에이전트용 최소 조회 루틴
+## 11. 에이전트용 최소 조회 루틴
 
 새 작업을 시작하는 에이전트는 최소한 아래 순서로 움직이는 것을 권장한다.
 
