@@ -10,13 +10,13 @@ workers_dev = true
 enabled = true
 
 [vars]
-R2_PUBLIC_BASE_URL = "<R2_PUBLIC_BASE_URL>"
+R2_PUBLIC_BASE_URL = "https://pub-your-r2-public-host.r2.dev"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "maple-life-docs"
-database_id = "<D1_DATABASE_ID>"
+database_id = "your_d1_database_id"
 
 [[r2_buckets]]
 binding = "DOCUMENT_IMAGES"
-bucket_name = "<R2_BUCKET_NAME>"
+bucket_name = "your_r2_bucket_name"

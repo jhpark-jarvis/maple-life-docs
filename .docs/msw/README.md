@@ -31,7 +31,7 @@
 - `msw-agent-optimization-rules.md`
   - MSW MCP 에이전트가 문서, 코드, 기존 구현 자산을 함께 활용해 최적 결과를 내기 위한 공용 운영 규칙과 프롬프트 템플릿
 - `maple-life-docs-api-reference.md`
-  - `rebro.pythonanywhere.com` 운영 앱에서 조회 가능한 API 목록과 용도 정리
+  - `<MAPLE_LIFE_DOCS_BASE_URL>` 운영 앱에서 조회 가능한 API 목록과 용도 정리
 
 ## 권장 읽기 순서
 
