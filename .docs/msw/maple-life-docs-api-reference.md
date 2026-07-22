@@ -3,12 +3,18 @@
 > 운영 기준
 > 이 문서는 MSW 개발용 에이전트가 `maple-life-docs` 운영 앱에서 어떤 API를 조회할 수 있는지 빠르게 파악하기 위한 참조 문서다.
 > 기본 base URL은 `<MAPLE_LIFE_DOCS_BASE_URL>`이며, 다른 환경이 명시되지 않으면 이 값을 기준으로 조회한다.
+> `<MAPLE_LIFE_DOCS_BASE_URL>`는 문서 내 placeholder이며, 실제 값은 에이전트 실행 시 환경 변수 또는 secret으로 주입되어야 한다.
 
 ## 1. 기본 정보
 
 - base URL: `<MAPLE_LIFE_DOCS_BASE_URL>`
 - 주요 API prefix: `/api`
 - 문서 보조 기능 prefix: `/documents`
+
+주의:
+
+- 이 문서는 실제 host 값을 포함하지 않는다.
+- 에이전트는 문서만 보고 도메인을 추정하지 않고, 주입된 base URL이 있을 때만 HTTP 조회를 수행한다.
 
 에이전트는 기본적으로 아래 순서로 조회한다.
 

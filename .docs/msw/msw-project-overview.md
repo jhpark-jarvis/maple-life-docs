@@ -3,6 +3,7 @@
 > 운영 원칙
 > 이 문서는 Maple Life를 어떤 프로젝트로 이해해야 하는지 방향을 잡아주는 정적 개요 문서입니다.
 > 실제 구현 착수 전에는 `<MAPLE_LIFE_DOCS_BASE_URL>` API 또는 D1 원문으로 관련 문서의 최신 상태를 다시 확인해야 합니다.
+> `<MAPLE_LIFE_DOCS_BASE_URL>`는 문서 내 placeholder이며, 실제 값은 에이전트 실행 시 환경 변수 또는 secret으로 주입되어야 합니다.
 
 ## 1. 프로젝트 정체성
 

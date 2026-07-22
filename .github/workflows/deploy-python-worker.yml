@@ -24,7 +24,44 @@ jobs:
 
       - name: Prepare Worker config
         working-directory: worker-python
-        run: cp wrangler.toml.example wrangler.toml
+        env:
+          WORKER_R2_PUBLIC_BASE_URL: ${{ vars.WORKER_R2_PUBLIC_BASE_URL }}
+          WORKER_D1_DATABASE_ID: ${{ vars.WORKER_D1_DATABASE_ID }}
+          WORKER_R2_BUCKET_NAME: ${{ vars.WORKER_R2_BUCKET_NAME }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          required = {
+              "WORKER_R2_PUBLIC_BASE_URL": os.environ.get("WORKER_R2_PUBLIC_BASE_URL", "").strip(),
+              "WORKER_D1_DATABASE_ID": os.environ.get("WORKER_D1_DATABASE_ID", "").strip(),
+              "WORKER_R2_BUCKET_NAME": os.environ.get("WORKER_R2_BUCKET_NAME", "").strip(),
+          }
+
+          missing = [name for name, value in required.items() if not value]
+          if missing:
+              raise SystemExit(
+                  "Missing GitHub Actions vars for worker deploy: " + ", ".join(missing)
+              )
+
+          template_path = Path("wrangler.toml.example")
+          output_path = Path("wrangler.toml")
+          content = template_path.read_text(encoding="utf-8")
+          content = content.replace(
+              "https://pub-your-r2-public-host.r2.dev",
+              required["WORKER_R2_PUBLIC_BASE_URL"],
+          )
+          content = content.replace(
+              "your_d1_database_id",
+              required["WORKER_D1_DATABASE_ID"],
+          )
+          content = content.replace(
+              "your_r2_bucket_name",
+              required["WORKER_R2_BUCKET_NAME"],
+          )
+          output_path.write_text(content, encoding="utf-8")
+          PY
 
       - name: Deploy Cloudflare Python Worker
         working-directory: worker-python
