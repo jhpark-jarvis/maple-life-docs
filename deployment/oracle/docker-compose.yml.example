@@ -1,0 +1,16 @@
+services:
+  fastapi:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: personal-service-fastapi
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - fastapi-instance:/app/instance
+
+volumes:
+  fastapi-instance:
