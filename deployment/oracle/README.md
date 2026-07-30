@@ -34,9 +34,9 @@ exit
 운영에 사용할 브랜치를 확인한 뒤 저장소를 내려받습니다.
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
-git checkout feature/FastAPI-migration
+    git clone <repository-url>
+    cd <repository-directory>
+    git checkout master
 ```
 
 운영 브랜치를 별도로 정하면 해당 브랜치명으로 바꿉니다.
@@ -82,7 +82,7 @@ R2_PUBLIC_BASE_URL=<r2-public-base-url>
 cp deployment/oracle/docker-compose.yml.example deployment/oracle/docker-compose.yml
 ```
 
-저장소 루트에서 이미지를 빌드하고 컨테이너를 시작합니다.
+저장소 루트에서 이미지를 빌드하고 컨테이너를 시작합니다. Dockerfile의 multi-stage build가 Node 환경에서 React 프론트를 빌드한 뒤, 결과물을 FastAPI 이미지에 포함합니다. 따라서 Oracle VM에 Node/npm을 별도로 설치하거나 `app/static/frontend`를 Git에서 내려받을 필요가 없습니다.
 
 ```bash
 docker compose -f deployment/oracle/docker-compose.yml up -d --build
@@ -123,9 +123,11 @@ curl http://127.0.0.1:8000/health
 새 버전을 반영할 때는 서버에서 다음 명령을 실행합니다.
 
 ```bash
-git pull origin feature/FastAPI-migration
-docker compose -f deployment/oracle/docker-compose.yml up -d --build
+git pull origin master
+docker compose -f deployment/oracle/docker-compose.yml up -d --build --force-recreate
 ```
+
+프론트 소스가 변경되면 Docker build cache가 해당 단계부터 다시 실행되며, `npm ci`는 `frontend/package-lock.json` 기준으로 의존성을 설치합니다. 호스트의 Node 설치나 호스트 디렉터리의 프론트 산출물은 필요하지 않습니다.
 
 현재 Compose 설정은 `restart: unless-stopped`를 사용하므로 VM 재부팅 후에도 컨테이너가 자동으로 다시 시작됩니다.
 
